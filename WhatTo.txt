@@ -1,0 +1,43 @@
+Pdfgeneration:
+pdflatex MSL.tex
+
+Diff generation:
+latexdiff MSL1.tex MSL2.tex > MSL3.tex
+pdflatex MSL3.tex
+
+HTML generation:
+latexml MSL.tex --dest MSL.xml
+latexmlpost MSL.xml -format html -pmml --splitat=chapter --javascript=LatexML-maybeMathJax.js --navigationtoc=context --css=LaTeXML-navbar-left.css --dest MSL.html
+
+Not done:
+* Generating images for Math - it can be done, but MathJax seems good enough
+* Fine-tune:
+** Restructure tex-source to remove tables
+** More text per page?
+** Move pre-amble to separate style-file
+** Listings (I might have manually added one line in ltx-listing.css)
+** Finer splitting?
+
+Known issues in LaTexML:
+* Nested emph does not work 
+* Processing result of latexdiff (but doesn't seem important)
+* Different handling of nameref (worked around)
+
+Installation:
+TeX: http://miktex.org/download Automatic download of other packages
+LatexML: 
+1. Perl: http://strawberryperl.com/
+2a. LatexML distribution:
+      http://dlmf.nist.gov/LaTeXML/get.html#SS4.SSS0.Px1 
+      Update LatexML-maybeMathJax.js as in https://github.com/brucemiller/LaTeXML/blob/d0332d5955b04e69abb52fc93a3d99b1282aa724/lib/LaTeXML/resources/javascript/LaTeXML-maybeMathjax.js
+2b. Source: https://github.com/brucemiller/LaTeXML 
+
+Pro:
+* Underlying LaTeX-format is stable
+* Predictable and clearly visible separation between structure and text
+* Straightforward to adapt using user-commands, e.g. for references
+* Great math-support
+
+Con:
+* LaTeXML is slightly limited variant of LaTeX
+* More time to get started (mostly done)
